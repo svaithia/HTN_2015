@@ -1,9 +1,4 @@
-/*
- * Copyright (C) 2014 Thalmic Labs Inc.
- * Distributed under the Myo SDK license agreement. See LICENSE.txt for details.
- */
-
-package com.thalmic.android.sample.helloworld;
+package com.myo.buddy;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +20,7 @@ import com.thalmic.myo.Quaternion;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
-public class HelloWorldActivity extends Activity {
+public class MainActivity extends Activity {
 
     private TextView mLockStateView;
     private TextView mTextView;
