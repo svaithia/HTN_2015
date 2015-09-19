@@ -1,4 +1,4 @@
-package com.myo.buddy.model;
+package com.myo.buddy.workout;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,12 +11,11 @@ import com.myo.buddy.R;
 
 public class WorkoutAdapter extends BaseAdapter{
     private final Context mContext;
-    private Workout mWorkouts[] = { new Pushup(), new Pushup() };
+    private Workout[] mWorkouts;
 
-
-
-    public WorkoutAdapter(Context context) {
+    public WorkoutAdapter(Context context, Workout[] workouts) {
         mContext = context;
+        mWorkouts = workouts;
     }
 
     @Override
@@ -41,11 +40,12 @@ public class WorkoutAdapter extends BaseAdapter{
             view = inflater.inflate(R.layout.listview_workout, null);
         }
 
-        Workout workout = mWorkouts[i];
+        final Workout workout = mWorkouts[i];
 
         TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         tvTitle.setText(workout.getWorkoutName());
 
         return view;
     }
+
 }

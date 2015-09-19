@@ -1,30 +1,25 @@
 package com.myo.buddy;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.myo.buddy.model.WorkoutAdapter;
-import com.thalmic.myo.AbstractDeviceListener;
-import com.thalmic.myo.Arm;
-import com.thalmic.myo.DeviceListener;
+import com.myo.buddy.workout.Pushup;
+import com.myo.buddy.workout.Workout;
+import com.myo.buddy.workout.WorkoutAdapter;
 import com.thalmic.myo.Hub;
-import com.thalmic.myo.Myo;
-import com.thalmic.myo.Pose;
-import com.thalmic.myo.Quaternion;
-import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends MyoActivity {
 
     private ListView lvWorkouts;
+    public final Workout[] mWorkouts = { new Pushup(), new Pushup() };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +35,15 @@ public class MainActivity extends Activity {
         }
 
         lvWorkouts = (ListView) findViewById(R.id.lvWorkouts);
-        lvWorkouts.setAdapter(new WorkoutAdapter(this));
+        lvWorkouts.setAdapter(new WorkoutAdapter(this, mWorkouts));
+        lvWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, CalibrationActivity.class);
+                intent.putExtra(Workout.TAG, mWorkouts[i]);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
