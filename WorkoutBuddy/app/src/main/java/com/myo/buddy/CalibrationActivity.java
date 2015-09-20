@@ -98,7 +98,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             // TODO stop logic
             mCalStarted = false;
 
-            if (peak_pitch.size() > 0 || dip_pitch.size() > 0) {
+            if (peak_pitch.size() > 1 || dip_pitch.size() > 1) {
                 peak_pitch.remove(0);
                 peak_pitch.remove(peak_pitch.size() - 1);
 
@@ -186,16 +186,13 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
 
             Datapoint dp = new Datapoint(timestamp,roll, pitch, yaw);
             mDataList.add(dp);
-            //Log.e(TAG + "WTF", "" + pitch);
             Log.e(TAG + "WTF", "  Pitch:   " + pitch + "   Roll:    "+ roll + "  Yaw:  " + yaw);
 
-            /*if(mWorkout.getWorkoutName().equals("Curls"))
+            if(mWorkout.getWorkoutName().equals("Curls"))
                 p_curr = pitch;
             else if(mWorkout.getWorkoutName().equals("Pushups")){
                 p_curr = roll;
-            }*/
-
-            p_curr = pitch;
+            }
 
             if (p_prevprev == Float.MAX_VALUE) {
                 p_prevprev = p_curr;

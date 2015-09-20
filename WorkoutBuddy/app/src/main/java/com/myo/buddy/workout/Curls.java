@@ -9,13 +9,21 @@ import com.thalmic.myo.Quaternion;
 import com.thalmic.myo.XDirection;
 
 public class Curls extends Workout {
+    private boolean lookingForPeak = false;
 
-    public Curls() {
+    public Curls(){
 
     }
 
     public Curls(Parcel in) {
+        super(in);
+        lookingForPeak = in.readInt() == 1;
+    }
 
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+        parcel.writeInt(lookingForPeak ? 1 : 0);
     }
 
     @Override

@@ -11,13 +11,21 @@ import com.thalmic.myo.XDirection;
  * Created by Abhijit on 9/20/2015.
  */
 public class Pushups extends Workout {
+    private boolean lookingForPeak = true;
 
     public Pushups(){
 
     }
 
-    public Pushups(Parcel in){
+    public Pushups(Parcel in) {
+        super(in);
+        lookingForPeak = in.readInt() == 1;
+    }
 
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+        parcel.writeInt(lookingForPeak ? 1 : 0);
     }
 
     @Override
@@ -43,13 +51,13 @@ public class Pushups extends Workout {
             pitch *= -1;
         }
 
-        if (!lookingForPeak && roll < mDip) {
-            lookingForPeak = true;
+        if (lookingForPeak && roll > mPeak) {
+            lookingForPeak = false;
             if (mCallback != null) {
                 mCallback.increment();
             }
-        } else if (lookingForPeak && roll > mPeak) {
-            lookingForPeak = false;
+        } else if (!lookingForPeak && roll < mDip) {
+            lookingForPeak = true;
             if (mCallback != null) {
                 mCallback.increment();
             }

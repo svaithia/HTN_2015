@@ -29,7 +29,6 @@ public abstract class Workout implements Parcelable, DeviceListener {
     protected float mDip;
     protected float mPeak;
     protected long ts_prev = Long.MAX_VALUE;
-    protected boolean lookingForPeak = false;
 
 
     public void setRange(float dip, float peak) {
@@ -42,7 +41,6 @@ public abstract class Workout implements Parcelable, DeviceListener {
         mDip = in.readFloat();
         mPeak = in.readFloat();
         ts_prev = in.readLong();
-        lookingForPeak = in.readInt() == 1;
     }
 
     public Workout() {
@@ -60,7 +58,6 @@ public abstract class Workout implements Parcelable, DeviceListener {
         parcel.writeFloat(mDip);
         parcel.writeFloat(mPeak);
         parcel.writeLong(ts_prev);
-        parcel.writeInt(lookingForPeak ? 1 : 0);
     }
 
 
