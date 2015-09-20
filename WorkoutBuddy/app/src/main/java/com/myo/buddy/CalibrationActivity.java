@@ -102,7 +102,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
                 peak_pitch.remove(peak_pitch.size() - 1);
 
                 dip_pitch.remove(0);
-                dip_pitch.remove(peak_pitch.size() - 1);
+                dip_pitch.remove(dip_pitch.size() - 1);
 
                 for (int i = 0; i < peak_pitch.size(); i++) {
                     Log.e(TAG, "" + peak_pitch.get(i));
@@ -185,7 +185,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
 
             Datapoint dp = new Datapoint(timestamp,roll, pitch, yaw);
             mDataList.add(dp);
-            Log.e(TAG + "WTF", "" + pitch);
+            //Log.e(TAG + "WTF", "" + pitch);
+            Log.e(TAG + "WTF", "  Pitch:   " + pitch + "   Roll:    "+ roll + "  Yaw:  " + yaw);
 
             if (p_prevprev == Float.MAX_VALUE) {
                 p_prevprev = pitch;
