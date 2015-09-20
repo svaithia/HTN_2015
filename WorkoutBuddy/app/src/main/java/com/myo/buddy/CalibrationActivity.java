@@ -77,7 +77,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
 
     private List<Datapoint> mDataList;
     private float p_prevprev;
-    private float   p_prev;
+    private float p_prev;
+    private float p_curr;
     private long ts_prev;
 
     private void startStopLogic() {
@@ -188,27 +189,35 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             //Log.e(TAG + "WTF", "" + pitch);
             Log.e(TAG + "WTF", "  Pitch:   " + pitch + "   Roll:    "+ roll + "  Yaw:  " + yaw);
 
+            /*if(mWorkout.getWorkoutName().equals("Curls"))
+                p_curr = pitch;
+            else if(mWorkout.getWorkoutName().equals("Pushups")){
+                p_curr = roll;
+            }*/
+
+            p_curr = pitch;
+
             if (p_prevprev == Float.MAX_VALUE) {
-                p_prevprev = pitch;
+                p_prevprev = p_curr;
                 return;
             }
 
             if (p_prev == Float.MAX_VALUE) {
-                p_prev = pitch;
+                p_prev = p_curr;
                 return;
             }
 
-            if (pitch < p_prev && p_prev >= p_prevprev) {
+            if (p_curr < p_prev && p_prev >= p_prevprev) {
                 peak_pitch.add(p_prev);
                 Log.e(TAG, "adding peak" + String.valueOf(p_prev));
             }
-            else if (pitch > p_prev && p_prev <= p_prevprev){
+            else if (p_curr > p_prev && p_prev <= p_prevprev){
                 dip_pitch.add(p_prev);
                 Log.e(TAG, "adding dip" + String.valueOf(p_prev));
             }
 
             p_prevprev = p_prev;
-            p_prev = pitch;
+            p_prev = p_curr;
             ts_prev = timestamp;
         }
     };

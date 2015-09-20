@@ -7,20 +7,24 @@ import com.thalmic.myo.Myo;
 import com.thalmic.myo.Quaternion;
 import com.thalmic.myo.XDirection;
 
-public class Curls extends Workout {
+/**
+ * Created by Abhijit on 9/20/2015.
+ */
+public class Pushups extends Workout {
 
-    public Curls() {
+    public Pushups(){
 
     }
 
-    public Curls(Parcel in) {
+    public Pushups(Parcel in){
 
     }
 
     @Override
     public String getWorkoutName() {
-        return "Curls";
+        return "Pushups";
     }
+
 
     @Override
     public void onOrientationData(Myo myo, long timestamp, Quaternion rotation) {
@@ -39,13 +43,13 @@ public class Curls extends Workout {
             pitch *= -1;
         }
 
-        if (lookingForPeak && pitch > mPeak) {
-            lookingForPeak = false;
+        if (!lookingForPeak && roll < mDip) {
+            lookingForPeak = true;
             if (mCallback != null) {
                 mCallback.increment();
             }
-        } else if (!lookingForPeak && pitch < mDip) {
-            lookingForPeak = true;
+        } else if (lookingForPeak && roll > mPeak) {
+            lookingForPeak = false;
             if (mCallback != null) {
                 mCallback.increment();
             }
@@ -54,15 +58,13 @@ public class Curls extends Workout {
         ts_prev = timestamp;
     }
 
-
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Curls createFromParcel(Parcel in) {
-            return new Curls(in);
+        public Pushups createFromParcel(Parcel in) {
+            return new Pushups(in);
         }
 
-        public Curls[] newArray(int size) {
-            return new Curls[size];
+        public Pushups[] newArray(int size) {
+            return new Pushups[size];
         }
     };
-
 }

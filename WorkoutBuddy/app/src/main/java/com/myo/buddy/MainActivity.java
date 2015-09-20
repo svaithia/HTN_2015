@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.myo.buddy.workout.Curls;
+import com.myo.buddy.workout.Pushups;
 import com.myo.buddy.workout.Workout;
 import com.myo.buddy.workout.WorkoutAdapter;
 import com.thalmic.myo.Hub;
@@ -20,7 +21,7 @@ import com.thalmic.myo.scanner.ScanActivity;
 public class MainActivity extends Activity {
 
     private ListView lvWorkouts;
-    public final Workout[] mWorkouts = { new Curls(), new Curls() };
+    public final Workout[] mWorkouts = { new Curls(), new Pushups() };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
