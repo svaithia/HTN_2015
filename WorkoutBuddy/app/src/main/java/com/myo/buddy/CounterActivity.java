@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.myo.buddy.view.CounterFrameLayout;
 import com.myo.buddy.workout.Workout;
 import com.thalmic.myo.Hub;
 
@@ -19,12 +21,14 @@ public class CounterActivity extends Activity implements Workout.WorkoutCallback
     private Hub mHub;
 
     private float mRepCounter = 0;
+    private CounterFrameLayout cflCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.counter_activity);
         tvCounter = (TextView) findViewById(R.id.tvCounter);
+        cflCounter = (CounterFrameLayout) findViewById(R.id.cflCounter);
         tvCounter.setText("" + mRepCounter);
 
         mHub = Hub.getInstance();
@@ -61,5 +65,10 @@ public class CounterActivity extends Activity implements Workout.WorkoutCallback
     public void increment() {
         mRepCounter += 0.5;
         tvCounter.setText("" + mRepCounter);
+    }
+
+    @Override
+    public void progress(float progress) {
+        cflCounter.setProgress(progress);
     }
 }

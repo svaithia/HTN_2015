@@ -3,21 +3,33 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:id="@+id/frameLayout"
+        android:id="@+id/rlCounterContainer"
         android:background="@drawable/counter_circle_background"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
+        <com.myo.buddy.view.CounterFrameLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:id="@+id/cflCounter"
+            android:src="@drawable/counter_circle_overlay"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
         <TextView
             android:id="@+id/tvCounter"
+            android:text="0.0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="100sp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
-    </FrameLayout>
+    </RelativeLayout>
+
 
 </RelativeLayout>
