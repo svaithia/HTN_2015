@@ -2,6 +2,7 @@ package com.myo.buddy.workout;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.thalmic.myo.Myo;
 import com.thalmic.myo.Quaternion;
@@ -50,6 +51,11 @@ public class Curls extends Workout {
                 mCallback.increment();
             }
         }
+
+        pitch = Math.min(mPeak, Math.max(mDip, pitch));
+        float percentage = Math.abs( (pitch - mDip) / (mPeak - mDip));
+
+        mCallback.progress(percentage);
 
         ts_prev = timestamp;
     }

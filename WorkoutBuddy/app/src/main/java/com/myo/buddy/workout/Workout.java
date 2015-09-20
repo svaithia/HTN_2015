@@ -16,6 +16,7 @@ public abstract class Workout implements Parcelable, DeviceListener {
 
     public interface WorkoutCallback {
         void increment();
+        void progress(float progress);
     }
 
     protected WorkoutCallback mCallback = null;
