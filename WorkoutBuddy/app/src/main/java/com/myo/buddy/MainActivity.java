@@ -1,5 +1,6 @@
 package com.myo.buddy;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,7 +17,7 @@ import com.myo.buddy.workout.WorkoutAdapter;
 import com.thalmic.myo.Hub;
 import com.thalmic.myo.scanner.ScanActivity;
 
-public class MainActivity extends MyoActivity {
+public class MainActivity extends Activity {
 
     private ListView lvWorkouts;
     public final Workout[] mWorkouts = { new Pushup(), new Pushup() };
