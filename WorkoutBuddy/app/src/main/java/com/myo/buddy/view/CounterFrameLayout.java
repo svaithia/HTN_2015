@@ -31,7 +31,7 @@ public class CounterFrameLayout extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        float offset = (canvas.getHeight()/2) - (canvas.getHeight() * (0.5f - mProgress));
+        float offset = (canvas.getHeight()/2) + (canvas.getHeight() * (mProgress - 0.5f));
         canvas.clipRect(0, 0, canvas.getWidth(), offset, Region.Op.DIFFERENCE);
         super.onDraw(canvas);
     }

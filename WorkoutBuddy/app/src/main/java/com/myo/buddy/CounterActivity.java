@@ -3,14 +3,16 @@ package com.myo.buddy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myo.buddy.view.CounterFrameLayout;
 import com.myo.buddy.workout.Workout;
 import com.thalmic.myo.Hub;
+
+import java.util.Locale;
 
 public class CounterActivity extends Activity implements Workout.WorkoutCallback {
     public static final String TAG = CounterActivity.class.getSimpleName();
@@ -22,6 +24,7 @@ public class CounterActivity extends Activity implements Workout.WorkoutCallback
 
     private float mRepCounter = 0;
     private CounterFrameLayout cflCounter;
+    private TextToSpeech mTextToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,13 @@ public class CounterActivity extends Activity implements Workout.WorkoutCallback
             finish();
             return;
         }
+
+        mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) { }
+            }
+        );
+        mTextToSpeech.setLanguage(Locale.US);
 
         Intent intent = getIntent();
         mWorkout = intent.getParcelableExtra(Workout.TAG);
@@ -65,6 +75,10 @@ public class CounterActivity extends Activity implements Workout.WorkoutCallback
     public void increment() {
         mRepCounter += 0.5;
         tvCounter.setText("" + mRepCounter);
+
+        if (mRepCounter%1 == 0) {
+            mTextToSpeech.speak("" + (int) mRepCounter, TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
     @Override
